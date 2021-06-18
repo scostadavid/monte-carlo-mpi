@@ -1,7 +1,8 @@
 # Projects
 .vscode
-build
+obj
 bin
+lib
 main
 
 # Created by https://www.gitignore.io/api/c,code
