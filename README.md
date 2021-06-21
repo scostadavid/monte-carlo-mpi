@@ -14,6 +14,11 @@ $> sudo apt install gcc
 ```bash
 $> sudo apt install build-essential 
 ```
+- MPI
+```bash
+$> sudo apt update
+$> sudo apt install openmpi-bin openmpi-common openssh-client openssh-server libopenmpi-dev
+```
 - make.
 ```bash
 $> sudo apt install make 
@@ -24,6 +29,10 @@ $> sudo apt install make
 - Run make.
 ```bash
 $> make
+```
+- Run app.
+```bash
+$> make run
 ```
 
 ## Authors
