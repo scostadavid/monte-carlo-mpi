@@ -37,6 +37,8 @@ $(MPI_BIN): $(OBJ) $(BIN) $(LIB) $(OBJS) $(LIBS)
 
 $(STANDALONE_BIN):
 	$(CC) standalone.c $(CFLAGS) -o $(STANDALONE_BIN)
+run: 
+	mpirun -np $(np) $(MPI_BIN)  
 
 $(OBJ):
 	$(MKDIR) $@
