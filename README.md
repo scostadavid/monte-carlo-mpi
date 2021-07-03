@@ -30,9 +30,14 @@ $> sudo apt install make
 ```bash
 $> make
 ```
-- Run app.
+- Run app with the number of processes (e.g. np=2)
 ```bash
-$> make run
+$> make np=number_of_processes run
+```
+
+## How to clean the build files
+```bash
+$> make clean
 ```
 
 ## Authors
