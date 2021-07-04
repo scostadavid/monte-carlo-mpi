@@ -33,7 +33,7 @@ $(MPI_BIN): $(OBJ) $(BIN) $(OBJS) $(LIBS)
 	$(CC) $(OBJS) main.c $(CFLAGS) -o $(MPI_BIN)
 
 run: 
-	mpirun -np $(np) $(MPI_BIN)  
+	mpirun --oversubscribe -np $(np) $(MPI_BIN)  
 
 $(OBJ):
 	$(MKDIR) $@
