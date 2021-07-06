@@ -31,11 +31,12 @@ int main (int argc, char* argv[]) {
     }; 
     
     
-    srand(time(NULL));
     MPI_Init (&argc, &argv);
 
     MPI_Comm_size (MPI_COMM_WORLD, &number_of_processes);
     MPI_Comm_rank (MPI_COMM_WORLD, &process_rank);
+
+    srand(time(NULL) + process_rank); //unique seed for each process
 
     if(process_rank == SERVER_RANK) {
         clock_gettime(CLOCK_MONOTONIC, &timer.start);
