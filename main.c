@@ -8,6 +8,10 @@
 
 #define SERVER_RANK 0
 
+// User input range [3, 10]
+#define USER_INPUT_MIN 3
+#define USER_INPUT_MAX 10
+
 int main (int argc, char* argv[]) {
 
     MPI_Status status;
@@ -16,7 +20,14 @@ int main (int argc, char* argv[]) {
     int src_rank;
     int number_of_processes;
     int msg_tag;
-    int n = 100000000;
+   
+    int n = atoi(argv[1]);
+    
+    if(n < USER_INPUT_MIN || n > USER_INPUT_MAX) {
+        n = USER_INPUT_MIN;
+    }
+
+    int number_of_points = pow(10, n);
 
     double buffer = 0;
     double pi = 0;
@@ -54,7 +65,7 @@ int main (int argc, char* argv[]) {
     } 
     else { //clients
         msg_tag = 0;
-        pi = monte_carlo_pi(n);
+        pi = monte_carlo_pi(number_of_points);
         MPI_Send(&pi, 1, MPI_DOUBLE, SERVER_RANK, msg_tag, MPI_COMM_WORLD);
     }
         
