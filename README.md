@@ -30,9 +30,9 @@ $> sudo apt install make
 ```bash
 $> make
 ```
-- Run app with the number of processes (e.g. np=2)
+- Run app with the number of processes and the '10^n' input (e.g. n=3 np=2)
 ```bash
-$> make np=number_of_processes run
+$> make n=power_of_10 np=number_of_processes run
 ```
 
 ## How to clean the build files
