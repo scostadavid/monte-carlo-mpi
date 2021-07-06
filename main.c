@@ -8,6 +8,10 @@
 
 #define SERVER_RANK 0
 
+// User input range [3, 10]
+#define USER_INPUT_MIN 3
+#define USER_INPUT_MAX 10
+
 int main (int argc, char* argv[]) {
 
     MPI_Status status;
@@ -18,6 +22,11 @@ int main (int argc, char* argv[]) {
     int msg_tag;
    
     int n = atoi(argv[1]);
+    
+    if(n < USER_INPUT_MIN || n > USER_INPUT_MAX) {
+        n = USER_INPUT_MIN;
+    }
+
     int number_of_points = pow(10, n);
 
     double buffer = 0;
