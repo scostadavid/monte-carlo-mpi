@@ -59,7 +59,6 @@ int main (int argc, char* argv[]) {
 
     if (process_rank == SERVER_RANK) {
         sum += monte_carlo_pi(number_of_points);
-        printf("PI %d: %lf\n", process_rank, sum);
         for (src_rank = 1; src_rank < number_of_processes; src_rank++) {
             msg_tag = 0;
             MPI_Recv(&buffer, 1, MPI_DOUBLE, src_rank, msg_tag, MPI_COMM_WORLD, &status);
@@ -69,7 +68,6 @@ int main (int argc, char* argv[]) {
     else { //clients
         msg_tag = 0;
         pi = monte_carlo_pi(number_of_points);
-        printf("PI %d: %lf\n", process_rank, pi);
         MPI_Send(&pi, 1, MPI_DOUBLE, SERVER_RANK, msg_tag, MPI_COMM_WORLD);
     }
         
