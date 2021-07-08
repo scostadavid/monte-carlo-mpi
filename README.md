@@ -32,7 +32,7 @@ $> make
 ```
 - Run app with the number of processes and the '10^n' input (e.g. n=3 np=2)
 ```bash
-$> make n=power_of_10 np=number_of_processes run
+$> make np=number_of_processes n=power_of_10 run
 ```
 
 ## How to clean the build files
