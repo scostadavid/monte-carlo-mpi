@@ -33,7 +33,7 @@ $(MPI_BIN): $(OBJ) $(BIN) $(OBJS) $(LIBS)
 	$(CC) $(OBJS) main.c $(CFLAGS) -o $(MPI_BIN)
 
 run: 
-	mpirun -np $(np) $(MPI_BIN) $(n) 
+	mpirun --quiet -np $(np) $(MPI_BIN) $(n) 
 
 $(OBJ):
 	$(MKDIR) $@

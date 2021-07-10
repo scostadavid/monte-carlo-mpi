@@ -80,10 +80,19 @@ int main (int argc, char* argv[]) {
         timer.start_ns = tm_timespec_to_nanosconds(timer.start);
         timer.end_ns = tm_timespec_to_nanosconds(timer.end);
         timer.elapsed_time = timer.end_ns - timer.start_ns;
+
+        fflush(stdout);
+        char out[1000];
+        FILE *fp = fopen("time_out.txt", "a");
+        FILE *fp2 = fopen("pi_out.txt", "a");
+        fprintf(fp, "%ld\n", timer.elapsed_time);
+        fprintf(fp2, "%.10lf\n", pi);
+        fclose(fp);
+        fclose(fp2);
         
-        printf("server(monte_carlo: elapsed_time)> %ldns\n", timer.elapsed_time);
-        printf("server(pi: aproximation)> %.10lf\n", pi);
-        printf("server(pi: error)> %g\n", fabs(M_PI - pi));
+        // printf("server(monte_carlo: elapsed_time)> %ldns\n", timer.elapsed_time);
+        // printf("server(pi: aproximation)> %.10lf\n", pi);
+        // printf("server(pi: error)> %g\n", fabs(M_PI - pi));
     }
 
 
