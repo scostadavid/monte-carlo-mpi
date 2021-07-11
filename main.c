@@ -1,12 +1,12 @@
 #include <mpi.h>
 #include <stdio.h>
 #include <time.h>
-#include "src/montecarlo.h"
-#include "src/timer.h"
 #include <unistd.h>
 #include <math.h>
+#include "src/montecarlo.h"
+#include "src/timer.h"
 
-#define SERVER_RANK 0
+#define LOWEST_RANK 0
 
 // User input range [3, 10]
 #define USER_INPUT_MIN 3
@@ -49,7 +49,7 @@ int main (int argc, char* argv[]) {
 
     srand(time(NULL) + process_rank); //unique seed for each process
 
-    if(process_rank == SERVER_RANK) {
+    if(process_rank == LOWEST_RANK) {
         number_of_points = pow(10, n)/number_of_processes;
         clock_gettime(CLOCK_MONOTONIC, &timer.start);
     }
@@ -57,7 +57,7 @@ int main (int argc, char* argv[]) {
     // Server broadcast
     MPI_Bcast(&number_of_points, 1, MPI_UNSIGNED_LONG, 0, MPI_COMM_WORLD);
 
-    if (process_rank == SERVER_RANK) {
+    if (process_rank == LOWEST_RANK) {
         sum += monte_carlo_pi(number_of_points);
         for (src_rank = 1; src_rank < number_of_processes; src_rank++) {
             msg_tag = 0;
@@ -68,10 +68,10 @@ int main (int argc, char* argv[]) {
     else { //clients
         msg_tag = 0;
         pi = monte_carlo_pi(number_of_points);
-        MPI_Send(&pi, 1, MPI_DOUBLE, SERVER_RANK, msg_tag, MPI_COMM_WORLD);
+        MPI_Send(&pi, 1, MPI_DOUBLE, LOWEST_RANK, msg_tag, MPI_COMM_WORLD);
     }
         
-    if(process_rank == SERVER_RANK) {
+    if(process_rank == LOWEST_RANK) {
 
         pi = sum / number_of_processes;
         
